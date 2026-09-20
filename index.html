@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="그림 카드를 보고 아이가 자유롭게 이야기를 만들어 발표하는 수업용 웹앱"
+    />
+    <meta name="theme-color" content="#8ed8f8" />
+    <title>이야기 만들기 카드</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff806f'/%3E%3Crect x='13' y='13' width='38' height='38' rx='9' fill='white'/%3E%3Ccircle cx='24' cy='24' r='4' fill='%23ff806f'/%3E%3Ccircle cx='40' cy='40' r='4' fill='%23ff806f'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="cloud cloud-left" aria-hidden="true"></div>
+      <div class="cloud cloud-right" aria-hidden="true"></div>
+      <div class="scene-decoration leaves-left" aria-hidden="true">🌿</div>
+      <div class="scene-decoration leaves-right" aria-hidden="true">🌿</div>
+      <div class="scene-decoration flowers" aria-hidden="true">🌼　🌼　🌼</div>
+      <div class="idea-note" aria-hidden="true">어떤<br />이야기가<br />올까요? 💗</div>
+
+      <header class="app-header">
+        <div class="title-group">
+          <p class="eyebrow">✦ 상상 놀이터</p>
+          <h1>이야기 만들기 카드</h1>
+          <p class="subtitle">상상하고 말하는 힘이 쑥쑥!</p>
+        </div>
+
+        <fieldset class="difficulty-picker" aria-label="난이도 선택">
+          <legend>난이도</legend>
+          <div class="difficulty-options">
+            <label>
+              <input type="radio" name="difficulty" value="easy" />
+              <span>쉬움</span>
+            </label>
+            <label>
+              <input type="radio" name="difficulty" value="normal" checked />
+              <span>보통</span>
+            </label>
+            <label>
+              <input type="radio" name="difficulty" value="challenge" />
+              <span>도전</span>
+            </label>
+          </div>
+        </fieldset>
+      </header>
+
+      <section
+        id="card-board"
+        class="card-board"
+        aria-label="이야기 만들기 카드"
+        aria-live="polite"
+      ></section>
+
+      <section class="activity-panel" aria-label="발표 활동">
+        <p class="speaking-prompt">🎤 어떤 이야기가 만들어질까요?</p>
+        <button id="draw-all-button" class="draw-all-button" type="button">
+          <span aria-hidden="true">🎲</span>
+          새로운 카드 뽑기
+        </button>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
