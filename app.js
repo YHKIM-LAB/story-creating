@@ -76,6 +76,7 @@ function createArtwork(item) {
     image.className = "card-image";
     image.alt = "";
     image.decoding = "async";
+    image.addEventListener("load", () => artwork.classList.add("has-image"));
     image.addEventListener("error", () => {
       artwork.classList.add("has-error");
       image.remove();
