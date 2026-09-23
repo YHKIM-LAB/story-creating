@@ -76,15 +76,15 @@ export const cardTypes = {
     dataKey: "characters",
     className: "character",
   },
+  companion: {
+    title: "누구랑?",
+    dataKey: "characters",
+    className: "companion",
+  },
   place: {
     title: "어디서?",
     dataKey: "places",
     className: "place",
-  },
-  event: {
-    title: "무슨 일이?",
-    dataKey: "events",
-    className: "event",
   },
   emotion: {
     title: "어떤 기분?",
@@ -94,7 +94,7 @@ export const cardTypes = {
 };
 
 export const difficultyTypes = {
-  easy: ["character", "event"],
-  normal: ["character", "place", "event"],
-  challenge: ["character", "place", "event", "emotion"],
+  easy: ["character", "companion"],
+  normal: ["character", "companion", "place"],
+  challenge: ["character", "companion", "place", "emotion"],
 };
