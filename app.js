@@ -9,8 +9,11 @@ let currentCards = {};
 let previousCombination = "";
 let animationTimer;
 
-const randomItem = (items, excludedId = "") => {
-  const candidates = items.filter((item) => item.id !== excludedId);
+const randomItem = (items, excludedIds = []) => {
+  const excludedIdSet = new Set(
+    Array.isArray(excludedIds) ? excludedIds : [excludedIds],
+  );
+  const candidates = items.filter((item) => !excludedIdSet.has(item.id));
   const pool = candidates.length > 0 ? candidates : items;
   return pool[Math.floor(Math.random() * pool.length)];
 };
@@ -27,7 +30,13 @@ function chooseAllCards() {
 
   getVisibleTypes().forEach((type) => {
     const { dataKey } = cardTypes[type];
-    nextCards[type] = randomItem(cardData[dataKey], currentCards[type]?.id);
+    const excludedIds = [currentCards[type]?.id];
+
+    if (type === "companion") {
+      excludedIds.push(nextCards.character?.id);
+    }
+
+    nextCards[type] = randomItem(cardData[dataKey], excludedIds);
   });
 
   // 각 카드가 달라져도 혹시 모를 동일 조합은 한 번 더 피합니다.
@@ -43,7 +52,12 @@ function chooseAllCards() {
 
 function chooseOneCard(type) {
   const { dataKey } = cardTypes[type];
-  currentCards[type] = randomItem(cardData[dataKey], currentCards[type]?.id);
+  const excludedIds = [currentCards[type]?.id];
+
+  if (type === "character") excludedIds.push(currentCards.companion?.id);
+  if (type === "companion") excludedIds.push(currentCards.character?.id);
+
+  currentCards[type] = randomItem(cardData[dataKey], excludedIds);
   previousCombination = getCombinationKey();
 }
 
@@ -62,10 +76,14 @@ function createArtwork(item) {
     image.className = "card-image";
     image.alt = "";
     image.decoding = "async";
+    image.addEventListener("error", () => {
+      artwork.classList.add("has-error");
+      image.remove();
+    });
     image.src = item.image;
-    image.addEventListener("load", () => artwork.classList.add("has-image"));
-    image.addEventListener("error", () => image.remove());
     artwork.append(image);
+  } else {
+    artwork.classList.add("has-error");
   }
 
   return artwork;
@@ -111,6 +129,22 @@ function renderCards({ animate = false } = {}) {
   }
 }
 
+function renderOneCard(type) {
+  cardBoard.classList.remove("is-shuffling");
+
+  const currentCard = cardBoard.querySelector(`[data-type="${type}"]`);
+  if (!currentCard) return;
+
+  const nextCard = createCardElement(type);
+  nextCard.classList.add("is-shuffling");
+  nextCard.addEventListener(
+    "animationend",
+    () => nextCard.classList.remove("is-shuffling"),
+    { once: true },
+  );
+  currentCard.replaceWith(nextCard);
+}
+
 function drawAllCards({ animate = true } = {}) {
   chooseAllCards();
   renderCards({ animate });
@@ -124,7 +158,7 @@ cardBoard.addEventListener("click", (event) => {
 
   const type = button.dataset.redraw;
   chooseOneCard(type);
-  renderCards({ animate: true });
+  renderOneCard(type);
 
   // DOM이 새로 만들어진 뒤 같은 카드의 버튼으로 초점을 되돌립니다.
   cardBoard.querySelector(`[data-redraw="${type}"]`)?.focus();
