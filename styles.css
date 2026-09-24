@@ -276,7 +276,8 @@ button:focus-visible {
   height: 100%;
   padding: 0.4rem;
   object-fit: contain;
-  opacity: 1;
+  opacity: 0;
+  transition: opacity 180ms ease-out;
 }
 
 .card-artwork.has-image .card-image {
