@@ -257,11 +257,16 @@ button:focus-visible {
 }
 
 .emoji-artwork {
+  display: none;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   font-size: clamp(5.5rem, 11vw, 10.5rem);
   line-height: 1;
   filter: drop-shadow(0 10px 3px rgba(46, 57, 72, 0.14));
   transform: translateY(0.1em);
+}
+
+.card-artwork.has-error .emoji-artwork {
+  display: block;
 }
 
 .card-image {
@@ -271,12 +276,15 @@ button:focus-visible {
   height: 100%;
   padding: 0.4rem;
   object-fit: contain;
-  opacity: 0;
-  transition: opacity 180ms ease-out;
+  opacity: 1;
 }
 
 .card-artwork.has-image .card-image {
   opacity: 1;
+}
+
+.card-artwork.has-image .emoji-artwork {
+  visibility: hidden;
 }
 
 .card-label {
