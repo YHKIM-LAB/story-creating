@@ -939,3 +939,13 @@ h1 {
     display: none;
   }
 }
+
+/* Keep fallback artwork hidden while the card image is still loading. */
+.emoji-artwork {
+  display: none;
+}
+
+.card-artwork.has-error .emoji-artwork {
+  display: block;
+  visibility: visible;
+}
