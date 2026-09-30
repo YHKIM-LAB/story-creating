@@ -2,7 +2,9 @@
 const createCard = (id, label, emoji, category) => ({
   id,
   label,
-  image: `./assets/${category}/${id}.png`,
+  // Resolve from this module so the URL stays correct when the app is hosted
+  // below a repository path (for example, on GitHub Pages).
+  image: new URL(`./assets/${category}/${id}.png`, import.meta.url).href,
   emoji,
 });
 

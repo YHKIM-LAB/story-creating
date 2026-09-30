@@ -44,3 +44,4 @@ assets/characters/rabbit.png
 5. 표시되는 GitHub Pages 주소에서 배포된 웹앱을 확인합니다.
 
 모든 링크가 상대 경로로 작성되어 있어 별도의 경로 설정 없이 프로젝트 페이지에서도 동작합니다.
+
