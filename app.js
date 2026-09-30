@@ -91,6 +91,7 @@ function createArtwork(item) {
     artwork.append(image);
     image.src = item.image;
 
+    // A cached image can already be complete before its event is observed.
     if (image.complete) {
       if (image.naturalWidth > 0) showImage();
       else showFallback();
