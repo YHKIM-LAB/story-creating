@@ -220,6 +220,11 @@ button:focus-visible {
   --card-bg: var(--green-soft);
 }
 
+.story-card--companion {
+  --card-accent: #e879a0;
+  --card-bg: #fff0f6;
+}
+
 .story-card--event {
   --card-accent: var(--orange);
   --card-bg: var(--orange-soft);
@@ -252,12 +257,16 @@ button:focus-visible {
 }
 
 .emoji-artwork {
-  display: block;
+  display: none;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   font-size: clamp(5.5rem, 11vw, 10.5rem);
   line-height: 1;
   filter: drop-shadow(0 10px 3px rgba(46, 57, 72, 0.14));
   transform: translateY(0.1em);
+}
+
+.card-artwork.has-error .emoji-artwork {
+  display: block;
 }
 
 .card-image {
@@ -267,15 +276,6 @@ button:focus-visible {
   height: 100%;
   padding: 0.4rem;
   object-fit: contain;
-  opacity: 0;
-}
-
-.card-artwork.has-image .card-image {
-  opacity: 1;
-}
-
-.card-artwork.has-image .emoji-artwork {
-  visibility: hidden;
 }
 
 .card-label {
@@ -402,6 +402,10 @@ button:focus-visible {
 }
 
 .card-board.is-shuffling .story-card {
+  animation: card-flip 650ms cubic-bezier(0.22, 0.85, 0.36, 1) both;
+}
+
+.story-card.is-shuffling {
   animation: card-flip 650ms cubic-bezier(0.22, 0.85, 0.36, 1) both;
 }
 
@@ -706,6 +710,11 @@ h1 {
 .story-card--place {
   --card-accent: #4eb65d;
   --card-bg: #f3fff0;
+}
+
+.story-card--companion {
+  --card-accent: #e879a0;
+  --card-bg: #fff0f6;
 }
 
 .story-card--event {
