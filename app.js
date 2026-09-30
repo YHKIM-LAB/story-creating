@@ -76,26 +76,16 @@ function createArtwork(item) {
     image.className = "card-image";
     image.alt = "";
     image.decoding = "async";
-    const showImage = () => {
-      artwork.classList.remove("has-error");
-      artwork.classList.add("has-image");
-    };
-    const showFallback = () => {
-      artwork.classList.remove("has-image");
-      artwork.classList.add("has-error");
-      image.remove();
-    };
-
-    image.addEventListener("load", showImage, { once: true });
-    image.addEventListener("error", showFallback, { once: true });
+    image.addEventListener(
+      "error",
+      () => {
+        artwork.classList.add("has-error");
+        image.remove();
+      },
+      { once: true },
+    );
     artwork.append(image);
     image.src = item.image;
-
-    // A cached image can already be complete before its event is observed.
-    if (image.complete) {
-      if (image.naturalWidth > 0) showImage();
-      else showFallback();
-    }
   } else {
     artwork.classList.add("has-error");
   }
