@@ -1,4 +1,4 @@
-import { cardData, cardTypes, difficultyTypes } from "./cardData.js?v=20260930-2";
+import { cardData, cardTypes, difficultyTypes } from "./cardData.js";
 
 const cardBoard = document.querySelector("#card-board");
 const drawAllButton = document.querySelector("#draw-all-button");
