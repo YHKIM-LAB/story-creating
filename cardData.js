@@ -1,4 +1,4 @@
-// image 경로에 파일을 추가하면 이모지 대신 해당 그림이 표시됩니다.
+// Paths stay relative to index.html so GitHub Pages keeps the repository prefix.
 const createCard = (id, label, emoji, category) => ({
   id,
   label,

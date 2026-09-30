@@ -66,30 +66,17 @@ function createArtwork(item) {
   artwork.className = "card-artwork";
   artwork.setAttribute("aria-hidden", "true");
 
-  const fallback = document.createElement("span");
-  fallback.className = "emoji-artwork";
-  fallback.textContent = item.emoji;
-  artwork.append(fallback);
-
-  if (item.image) {
-    const image = document.createElement("img");
-    image.className = "card-image";
-    image.alt = "";
-    image.decoding = "async";
-    image.addEventListener(
-      "error",
-      () => {
-        console.error("Card image failed to load", image.src);
-        artwork.classList.add("has-error");
-        image.remove();
-      },
-      { once: true },
-    );
-    artwork.append(image);
-    image.src = item.image;
-  } else {
-    artwork.classList.add("has-error");
-  }
+  const image = document.createElement("img");
+  image.className = "card-image";
+  image.alt = "";
+  image.decoding = "async";
+  image.addEventListener(
+    "error",
+    () => console.error("Card image failed to load", image.src),
+    { once: true },
+  );
+  artwork.append(image);
+  image.src = item.image;
 
   return artwork;
 }
