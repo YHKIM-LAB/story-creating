@@ -79,6 +79,7 @@ function createArtwork(item) {
     image.addEventListener(
       "error",
       () => {
+        console.error("Card image failed to load", image.src);
         artwork.classList.add("has-error");
         image.remove();
       },
